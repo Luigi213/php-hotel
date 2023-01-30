@@ -42,7 +42,7 @@
 
     ];
     if(isset($_GET['parking']) || isset($_GET['vote'])){
-        $select_check = $_GET['select'];
+        $parking_check = $_GET['parking'];
         $vote_check = $_GET['vote'];
     }
 ?>
@@ -59,13 +59,15 @@
     <body>
         <div>
             <form method="GET">
-                <input type="text" name="select" placeholder="parking or vote">
-                <input type="number" name="vote" placeholder="vote" min="1" max="5">
+                <label for="parking">Cerca in base al parcheggio:</label>
+                <input type="text" name="parking" placeholder="Digita parking" id="parking">
+                <label for="vote">Cerca in base al voto:</label>
+                <input type="number" name="vote" id="vote" placeholder="vote" min="1" max="5">
                 <button type="sumbit">send</button>
             </form>
         </div>
-        <?php if(!isset($select_check) == null || !isset($vote_check) == null) { ?>
-            <?php if(!$select_check == '' || !$vote_check == '') { ?>
+        <?php if(!isset($parking_check) == null || !isset($vote_check) == null) { ?>
+            <?php if(!$parking_check == '' || !$vote_check == '') { ?>
                 <table class="table">
                     <thead>
                         <tr>
@@ -79,7 +81,7 @@
                     <tbody>
                         <?php foreach($hotels as $hotel) { ?>
                             <tr>
-                                <?php if($hotel['parking'] == true && $select_check == 'parking') { ?>
+                                <?php if($hotel['parking'] == true && $parking_check == 'parking') { ?>
                                     <?php foreach($hotel as $key=>$item_hotel) { ?>
                                         <td>
                                             <?php if($key == 'parking') {
@@ -91,9 +93,9 @@
                                         </td>
                                     <?php } ?>    
                                 <?php } ?>
-                                <?php if($hotel['vote'] == $vote_check  && $select_check == 'vote') { ?>
+                                <?php if($hotel['vote'] == $vote_check && $parking_check != 'parking') { ?>
                                     <?php foreach($hotel as $key=>$item_hotel) { ?>
-                                        <td>
+                                        <td>                                                                        
                                             <?php if($key == 'parking') {
                                                 if($item_hotel == true){
                                                     echo 'Si';
@@ -106,7 +108,7 @@
                                                 echo $item_hotel;
                                             } ?>
                                         </td>
-                                    <?php } ?>    
+                                    <?php } ?>
                                 <?php } ?>
                             </tr>
                         <?php } ?>

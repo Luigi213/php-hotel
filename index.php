@@ -54,24 +54,37 @@
     </head>
     <body>
         <div>
-            <?php foreach($hotels as $hotel) { ?>
-                <div class="pb-4">
-                    <?php foreach($hotel as $key=>$item_hotel) { ?>
-                        <p>
-                            <?php if($key == 'parking') {
-                            if($item_hotel == true){
-                                echo $key.'=> Si';
-                            }            
-                            else{
-                                echo $key.'=> No';
-                            } ?>                
-                        <?php } else { 
-                            echo $key." => ".$item_hotel;
-                        } ?>
-                        </p>                        
-                    <?php } ?>    
-                </div>
-            <?php } ?>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>description</th>
+                        <th>parking</th>
+                        <th>vote</th>
+                        <th>distance_to_center</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($hotels as $hotel) { ?>
+                        <tr>
+                            <?php foreach($hotel as $key=>$item_hotel) { ?>
+                                <td>
+                                    <?php if($key == 'parking') {
+                                    if($item_hotel == true){
+                                        echo 'Si';
+                                    }            
+                                    else{
+                                        echo 'No';
+                                    } ?>                
+                                    <?php } else { 
+                                        echo $item_hotel;
+                                    } ?>                   
+                                </td>
+                            <?php } ?>    
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
         </div>
     </body>
 </html>

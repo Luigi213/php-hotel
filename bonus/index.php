@@ -41,6 +41,10 @@
         ],
 
     ];
+    if(isset($_GET['parking']) || isset($_GET['vote'])){
+        $select_check = $_GET['select'];
+        $vote_check = $_GET['vote'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -54,37 +58,61 @@
     </head>
     <body>
         <div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>name</th>
-                        <th>description</th>
-                        <th>parking</th>
-                        <th>vote</th>
-                        <th>distance_to_center</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach($hotels as $hotel) { ?>
-                        <tr>
-                            <?php foreach($hotel as $key=>$item_hotel) { ?>
-                                <td>
-                                    <?php if($key == 'parking') {
-                                    if($item_hotel == true){
-                                        echo 'Si';
-                                    }            
-                                    else{
-                                        echo 'No';
-                                    } ?>                
-                                    <?php } else { 
-                                        echo $item_hotel;
-                                    } ?>                   
-                                </td>
-                            <?php } ?>    
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+            <form method="GET">
+                <input type="text" name="select" placeholder="parking or vote">
+                <input type="number" name="vote" placeholder="vote" min="1" max="5">
+                <button type="sumbit">send</button>
+            </form>
         </div>
+        <?php if(!isset($select_check) == null || !isset($vote_check) == null) { ?>
+            <?php if(!$select_check == '' || !$vote_check == '') { ?>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>description</th>
+                            <th>parking</th>
+                            <th>vote</th>
+                            <th>distance_to_center</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($hotels as $hotel) { ?>
+                            <tr>
+                                <?php if($hotel['parking'] == true && $select_check == 'parking') { ?>
+                                    <?php foreach($hotel as $key=>$item_hotel) { ?>
+                                        <td>
+                                            <?php if($key == 'parking') {
+                                                echo 'Si';                                          
+                                            ?>          
+                                            <?php } else {
+                                                echo $item_hotel;
+                                            } ?>
+                                        </td>
+                                    <?php } ?>    
+                                <?php } ?>
+                                <?php if($hotel['vote'] == $vote_check  && $select_check == 'vote') { ?>
+                                    <?php foreach($hotel as $key=>$item_hotel) { ?>
+                                        <td>
+                                            <?php if($key == 'parking') {
+                                                if($item_hotel == true){
+                                                    echo 'Si';
+                                                }    
+                                                else{
+                                                    echo 'No';
+                                                }                                        
+                                            ?>          
+                                            <?php } else {
+                                                echo $item_hotel;
+                                            } ?>
+                                        </td>
+                                    <?php } ?>    
+                                <?php } ?>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            <?php } ?>
+        <?php } ?>
     </body>
 </html>

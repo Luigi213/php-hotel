@@ -77,7 +77,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <?php if(!isset($parking_check) || !isset($vote_check) || !$parking_check == '' || !$vote_check == '') { ?>
+                        <?php if(isset($parking_check) || isset($vote_check)) { ?>
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -103,7 +103,7 @@
                                                     </td>
                                                 <?php } ?>    
                                             <?php } ?>
-                                            <?php if($hotel['vote'] == $vote_check && $parking_check != 'parking') { ?>
+                                            <?php if($hotel['vote'] >= $vote_check && $parking_check != 'parking') { ?>
                                                 <?php foreach($hotel as $key=>$item_hotel) { ?>
                                                     <td>                                                                       
                                                         <?php if($key == 'parking') {

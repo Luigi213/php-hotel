@@ -58,68 +58,78 @@
     </head>
     <body>
         <header class="text-center">
-            <h1 class="mb-5">Scegli tra uno dei filtri:</h1>
-            <div class="mb-5">
-                <form method="GET">
-                    <label for="parking">Cerca in base al parcheggio:</label>
-                    <input type="text" name="parking" placeholder="Digita parking" id="parking">
-                    <label for="vote">Cerca in base al voto:</label>
-                    <input type="number" name="vote" id="vote" placeholder="vote" min="1" max="5">
-                    <button type="sumbit">send</button>
-                </form>
+            <div class="container mb-5">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="mb-5">Scegli tra uno dei filtri:</h1>
+                        <form method="GET">
+                            <label for="parking">Cerca in base al parcheggio:</label>
+                            <input type="text" name="parking" placeholder="Digita parking" id="parking">
+                            <label for="vote">Cerca in base al voto:</label>
+                            <input type="number" name="vote" id="vote" placeholder="vote" min="1" max="5">
+                            <button type="sumbit">send</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </header>
         <main class="text-center">
-            <?php if(!isset($parking_check) == null || !isset($vote_check) == null) { ?>
-                <?php if(!$parking_check == '' || !$vote_check == '') { ?>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                                <th>description</th>
-                                <th>parking</th>
-                                <th>vote</th>
-                                <th>distance_to_center</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach($hotels as $hotel) { ?>
-                                <tr>
-                                    <?php if($hotel['parking'] == true && $parking_check == 'parking') { ?>
-                                        <?php foreach($hotel as $key=>$item_hotel) { ?>
-                                            <td>
-                                                <?php if($key == 'parking') {
-                                                    echo 'Si';                                          
-                                                ?>          
-                                                <?php } else {
-                                                    echo $item_hotel;
-                                                } ?>
-                                            </td>
-                                        <?php } ?>    
-                                    <?php } ?>
-                                    <?php if($hotel['vote'] == $vote_check && $parking_check != 'parking') { ?>
-                                        <?php foreach($hotel as $key=>$item_hotel) { ?>
-                                            <td>                                                                       
-                                                <?php if($key == 'parking') {
-                                                    if($item_hotel == true){
-                                                        echo 'Si';
-                                                    }    
-                                                    else{
-                                                        echo 'No';
-                                                    }                                        
-                                                ?>          
-                                                <?php } else {
-                                                    echo $item_hotel;
-                                                } ?>
-                                            </td>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <?php if(!isset($parking_check) == null || !isset($vote_check) == null) { ?>
+                            <?php if(!$parking_check == '' || !$vote_check == '') { ?>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>name</th>
+                                            <th>description</th>
+                                            <th>parking</th>
+                                            <th>vote</th>
+                                            <th>distance_to_center</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($hotels as $hotel) { ?>
+                                            <tr>
+                                                <?php if($hotel['parking'] == true && $parking_check == 'parking') { ?>
+                                                    <?php foreach($hotel as $key=>$item_hotel) { ?>
+                                                        <td>
+                                                            <?php if($key == 'parking') {
+                                                                echo 'Si';                                          
+                                                            ?>          
+                                                            <?php } else {
+                                                                echo $item_hotel;
+                                                            } ?>
+                                                        </td>
+                                                    <?php } ?>    
+                                                <?php } ?>
+                                                <?php if($hotel['vote'] == $vote_check && $parking_check != 'parking') { ?>
+                                                    <?php foreach($hotel as $key=>$item_hotel) { ?>
+                                                        <td>                                                                       
+                                                            <?php if($key == 'parking') {
+                                                                if($item_hotel == true){
+                                                                    echo 'Si';
+                                                                }    
+                                                                else{
+                                                                    echo 'No';
+                                                                }                                        
+                                                            ?>          
+                                                            <?php } else {
+                                                                echo $item_hotel;
+                                                            } ?>
+                                                        </td>
+                                                    <?php } ?>
+                                                <?php } ?> 
+                                            </tr>
                                         <?php } ?>
-                                    <?php } ?> 
-                                </tr>
+                                    </tbody>
+                                </table>
                             <?php } ?>
-                        </tbody>
-                    </table>
-                <?php } ?>
-            <?php } ?>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
         </main>
     </body>
 </html>
